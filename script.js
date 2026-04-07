@@ -26,6 +26,16 @@ const neckStyles = [
   "assets/neck/thick.png",
 ];
 
+const hairStyles = [
+  "assets/hair/default.png",
+  "assets/hair/bang.png",
+  "assets/hair/curls.png",
+  "assets/hair/elegant.png",
+  "assets/hair/fancy.png",
+  "assets/hair/quiff.png",
+  "assets/hair/short.png",
+];
+
 function setActiveButton(sectionElement, clickedButton) {
   const buttons = sectionElement.querySelectorAll("button");
   buttons.forEach((button) => button.classList.remove("is-active"));
@@ -66,6 +76,15 @@ function setNeck(path) {
   neckImage.setAttribute("src", path);
 }
 
+function setHair(path) {
+  const hairImage = document.getElementById("hair");
+  if (!hairImage) {
+    return;
+  }
+
+  hairImage.setAttribute("src", path);
+}
+
 function renderStyleButtons(paths, onSelect) {
   const styleContainer = document.getElementById("style");
   if (!styleContainer) {
@@ -92,6 +111,10 @@ function changeBackground() {
 
 function changeNeck() {
   renderStyleButtons(neckStyles, setNeck);
+}
+
+function changeHair() {
+  renderStyleButtons(hairStyles, setHair);
 }
 
 registerSectionActiveState("#accessories");
