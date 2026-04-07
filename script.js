@@ -19,6 +19,13 @@ const backgrounds = [
   "assets/backgrounds/yellow70.png",
 ];
 
+const neckStyles = [
+  "assets/neck/default.png",
+  "assets/neck/bend-forward.png",
+  "assets/neck/bend-backward.png",
+  "assets/neck/thick.png",
+];
+
 function setActiveButton(sectionElement, clickedButton) {
   const buttons = sectionElement.querySelectorAll("button");
   buttons.forEach((button) => button.classList.remove("is-active"));
@@ -50,7 +57,16 @@ function setBackground(path) {
   backgroundImage.setAttribute("src", path);
 }
 
-function changeBackground() {
+function setNeck(path) {
+  const neckImage = document.getElementById("neck");
+  if (!neckImage) {
+    return;
+  }
+
+  neckImage.setAttribute("src", path);
+}
+
+function renderStyleButtons(paths, onSelect) {
   const styleContainer = document.getElementById("style");
   if (!styleContainer) {
     return;
@@ -58,16 +74,25 @@ function changeBackground() {
 
   styleContainer.innerHTML = "";
 
-  backgrounds.forEach((path) => {
+  paths.forEach((path) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.textContent = path.split("/").pop().replace(".png", "");
+    const label = path.split("/").pop().replace(".png", "").replace(/-/g, " ");
+    button.textContent = label.charAt(0).toUpperCase() + label.slice(1);
     button.onclick = function () {
-      setBackground(path);
+      onSelect(path);
     };
     styleContainer.appendChild(button);
   });
 }
 
-registerSectionActiveState(".accessories");
+function changeBackground() {
+  renderStyleButtons(backgrounds, setBackground);
+}
+
+function changeNeck() {
+  renderStyleButtons(neckStyles, setNeck);
+}
+
+registerSectionActiveState("#accessories");
 registerSectionActiveState("#style");
