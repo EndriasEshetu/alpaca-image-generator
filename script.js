@@ -146,6 +146,85 @@ function registerStyleGroupHandlers() {
   });
 }
 
+function randomizeAlpaca() {
+  Object.values(styleGroups).forEach((group) => {
+    const randomIndex = Math.floor(Math.random() * group.items.length);
+    const randomItem = group.items[randomIndex];
+    setLayerImage(group.layerId, buildAssetPath(group.folder, randomItem));
+  });
+}
+
+function getLayerImagesInRenderOrder() {
+  const layerContainer = document.getElementById("alpaca");
+  if (!layerContainer) {
+    return [];
+  }
+
+  const images = Array.from(layerContainer.querySelectorAll("img"));
+
+  return images
+    .map((image, index) => {
+      const zIndex = Number.parseInt(window.getComputedStyle(image).zIndex, 10);
+      return {
+        image,
+        index,
+        zIndex: Number.isNaN(zIndex) ? 0 : zIndex,
+      };
+    })
+    .sort((a, b) => {
+      if (a.zIndex !== b.zIndex) {
+        return a.zIndex - b.zIndex;
+      }
+      return a.index - b.index;
+    })
+    .map((entry) => entry.image);
+}
+
+function ensureImageLoaded(image) {
+  return new Promise((resolve) => {
+    if (image.complete && image.naturalWidth > 0) {
+      resolve();
+      return;
+    }
+
+    image.addEventListener("load", resolve, { once: true });
+    image.addEventListener("error", resolve, { once: true });
+  });
+}
+
+async function downloadAlpaca() {
+  const alpaca = document.getElementById("alpaca");
+  if (!alpaca) {
+    return;
+  }
+
+  const width = Math.max(1, Math.round(alpaca.clientWidth));
+  const height = Math.max(1, Math.round(alpaca.clientHeight));
+  const canvas = document.createElement("canvas");
+  const scale = window.devicePixelRatio || 1;
+
+  canvas.width = Math.round(width * scale);
+  canvas.height = Math.round(height * scale);
+
+  const context = canvas.getContext("2d");
+  if (!context) {
+    return;
+  }
+
+  context.scale(scale, scale);
+
+  const layerImages = getLayerImagesInRenderOrder();
+  for (const layerImage of layerImages) {
+    await ensureImageLoaded(layerImage);
+    context.drawImage(layerImage, 0, 0, width, height);
+  }
+
+  const downloadLink = document.createElement("a");
+  downloadLink.href = canvas.toDataURL("image/png");
+  downloadLink.download = "alpaca-avatar.png";
+  downloadLink.click();
+}
+
 registerStyleGroupHandlers();
 registerSectionActiveState("#accessories");
 registerSectionActiveState("#style");
