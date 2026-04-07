@@ -7,11 +7,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Alpaca Image Generator</h1>
+    <h1>ALPACA GENERATOR</h1>
+    <div class="container">
+      <div id="alpaca">
+        <img id="background" src="assets/backgrounds/blue50.png" />
+      </div>
 
-    <div id="alpaca">
-      <img id="background" src="assets/background/background1.jpg" />
-      <button onclick="changeBackground()">Change Background</button>
+      <div id="controls">
+        <h3>ACCESSORIZE THE ALPACA'S</h3>
+        <div class="accessories">
+          <button onclick="changeHair()">Hair</button>
+          <button onclick="changeEars()">Ears</button>
+          <button onclick="changeEyes()">Eyes</button>
+          <button onclick="changeMouth()">Mouth</button>
+          <button onclick="changeNeck()">Neck</button>
+          <button onclick="changeLeg()">Leg</button>
+          <button onclick="changeAccessories()">Accessories</button>
+          <button onclick="changeBackground()">Background</button>
+        </div>
+        <h3>STYLE</h3>
+        <div id="style" class="style">
+          <p>Click Background to see available styles.</p>
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
