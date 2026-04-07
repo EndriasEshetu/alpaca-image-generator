@@ -123,6 +123,12 @@ button:hover {
   color: white;
 }
 
+.footer {
+  text-align: center;
+  margin: 2rem 0;
+  color: #00458e;
+}
+
 @media (max-width: 768px) {
   body {
     margin: 1rem;
