@@ -1,4 +1,5 @@
 body {
+  background: #e1e1e1;
   margin: 2rem 6rem;
   font-family: Arial, sans-serif;
   color: #000048;
@@ -13,19 +14,27 @@ h1 {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   justify-content: center;
+  align-items: start;
 }
 #alpaca {
   position: relative;
-  height: 70vh;
+  width: min(100%, 420px);
+  aspect-ratio: 1 / 1;
   margin: 2rem;
 }
 #background,
 #neck,
-#hair {
+#hair,
+#nose,
+#eye,
+#ear,
+#mouth,
+#leg,
+#accessory {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 70vh;
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -38,12 +47,27 @@ h1 {
   object-fit: contain;
 }
 
-#hair {
+#ear,
+#accessory {
   z-index: 2;
   object-fit: contain;
 }
+
+#nose,
+#mouth {
+  z-index: 3;
+  object-fit: contain;
+}
+
+#eye,
+#hair {
+  z-index: 4;
+  object-fit: contain;
+}
+
 #controls {
-  margin-right: 3rem;
+  width: 100%;
+  max-width: 420px;
   margin-bottom: 2rem;
 }
 .accessories,
@@ -54,8 +78,7 @@ h1 {
   max-width: 400px;
 }
 
-button,
-p {
+button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -63,6 +86,11 @@ p {
   color: #00458e;
   border: 1px solid #00458e;
   border-radius: 4rem;
+}
+
+p {
+  font-size: 16px;
+  color: #00458e;
 }
 
 button.is-active,
@@ -88,5 +116,11 @@ button:hover {
   }
   #alpaca {
     margin: 0;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  #controls {
+    margin-right: 0;
   }
 }

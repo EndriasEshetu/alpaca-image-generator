@@ -31,10 +31,59 @@ const hairStyles = [
   "assets/hair/bang.png",
   "assets/hair/curls.png",
   "assets/hair/elegant.png",
-  "assets/hair/fancy.png",
   "assets/hair/quiff.png",
   "assets/hair/short.png",
 ];
+
+const eyeStyles = [
+  "assets/eyes/default.png",
+  "assets/eyes/angry.png",
+  "assets/eyes/naughty.png",
+  "assets/eyes/panda.png",
+  "assets/eyes/smart.png",
+  "assets/eyes/star.png",
+];
+
+const earStyles = [
+  "assets/ears/default.png",
+  "assets/ears/tilt-backward.png",
+  "assets/ears/tilt-forward.png",
+];
+
+const mouthStyles = [
+  "assets/mouth/default.png",
+  "assets/mouth/astonished.png",
+  "assets/mouth/eating.png",
+  "assets/mouth/laugh.png",
+  "assets/mouth/tongue.png",
+];
+
+const legStyles = [
+  "assets/leg/default.png",
+  "assets/leg/bubble-tea.png",
+  "assets/leg/cookie.png",
+  "assets/leg/game-console.png",
+  "assets/leg/tilt-backward.png",
+  "assets/leg/tilt-forward.png",
+];
+
+const accessoryStyles = [
+  "assets/accessories/headphone.png",
+  "assets/accessories/earings.png",
+  "assets/accessories/flower.png",
+  "assets/accessories/glasses.png",
+];
+
+const styleGroups = {
+  background: { paths: backgrounds, layerId: "background" },
+  neck: { paths: neckStyles, layerId: "neck" },
+  hair: { paths: hairStyles, layerId: "hair" },
+  eyes: { paths: eyeStyles, layerId: "eye" },
+  ears: { paths: earStyles, layerId: "ear" },
+  mouth: { paths: mouthStyles, layerId: "mouth" },
+  leg: { paths: legStyles, layerId: "leg" },
+  accessory: { paths: accessoryStyles, layerId: "accessory" },
+};
 
 function setActiveButton(sectionElement, clickedButton) {
   const buttons = sectionElement.querySelectorAll("button");
@@ -58,31 +107,13 @@ function registerSectionActiveState(sectionSelector) {
   });
 }
 
-function setBackground(path) {
-  const backgroundImage = document.getElementById("background");
-  if (!backgroundImage) {
+function setLayerImage(layerId, path) {
+  const layerImage = document.getElementById(layerId);
+  if (!layerImage) {
     return;
   }
 
-  backgroundImage.setAttribute("src", path);
-}
-
-function setNeck(path) {
-  const neckImage = document.getElementById("neck");
-  if (!neckImage) {
-    return;
-  }
-
-  neckImage.setAttribute("src", path);
-}
-
-function setHair(path) {
-  const hairImage = document.getElementById("hair");
-  if (!hairImage) {
-    return;
-  }
-
-  hairImage.setAttribute("src", path);
+  layerImage.setAttribute("src", path);
 }
 
 function renderStyleButtons(paths, onSelect) {
@@ -105,16 +136,47 @@ function renderStyleButtons(paths, onSelect) {
   });
 }
 
+function showStyleGroup(groupName) {
+  const group = styleGroups[groupName];
+  if (!group) {
+    return;
+  }
+
+  renderStyleButtons(group.paths, (path) => {
+    setLayerImage(group.layerId, path);
+  });
+}
+
 function changeBackground() {
-  renderStyleButtons(backgrounds, setBackground);
+  showStyleGroup("background");
 }
 
 function changeNeck() {
-  renderStyleButtons(neckStyles, setNeck);
+  showStyleGroup("neck");
 }
 
 function changeHair() {
-  renderStyleButtons(hairStyles, setHair);
+  showStyleGroup("hair");
+}
+
+function changeEyes() {
+  showStyleGroup("eyes");
+}
+
+function changeEars() {
+  showStyleGroup("ears");
+}
+
+function changeMouth() {
+  showStyleGroup("mouth");
+}
+
+function changeLeg() {
+  showStyleGroup("leg");
+}
+
+function changeAccessory() {
+  showStyleGroup("accessory");
 }
 
 registerSectionActiveState("#accessories");
