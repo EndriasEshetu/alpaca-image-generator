@@ -1,22 +1,17 @@
 # Alpaca Image Generator
 
-A front-end web app that lets users build a custom alpaca avatar by combining image layers. This project is inspired by the Codementor Alpaca Image Generator challenge and focuses on DOM manipulation with plain HTML, CSS, and JavaScript.
+Interactive alpaca avatar builder made with plain HTML, CSS, and JavaScript.
 
-## Project Goal
+Live Demo: https://endrias-alpaca-image-generator.vercel.app
 
-Create an interactive avatar generator where users can:
+## Project Purpose
 
-- Customize alpaca parts
-- Randomize the avatar
-- Download the generated image
+This project is built as a deep practice project for:
 
-## Features
-
-- Layer-based avatar rendering
-- Background switch support
-- Customization-ready assets structure
-- Simple and beginner-friendly codebase
-- No external dependencies required
+- DOM manipulation in detail
+- Writing clean, readable JavaScript
+- Building reusable functions manually (without frameworks)
+- Organizing UI behavior with reusable component patterns in vanilla JS
 
 ## Tech Stack
 
@@ -24,7 +19,35 @@ Create an interactive avatar generator where users can:
 - CSS3
 - JavaScript (Vanilla)
 
-## Folder Structure
+No frameworks and no UI libraries are used.
+
+## Requirements Covered
+
+- Customize alpaca profile image by selecting parts and styles
+- Customization panel for categories and style options
+- Randomize feature to generate a full random alpaca
+- Download feature to export the generated alpaca image as PNG
+
+## Features
+
+- Layer-based alpaca rendering using stacked image elements
+- Category-based style panel (background, hair, eyes, ears, mouth, neck, leg, accessories)
+- Active-state button handling for better UX feedback
+- Randomize all layers in one click
+- Download current alpaca composition as `alpaca-avatar.png`
+- Responsive layout for desktop and mobile
+
+## Clean Code and Reusability Approach
+
+- Centralized configuration with `styleGroups`
+- Generic asset path builder: `buildAssetPath(folder, item)`
+- Generic style renderer: `renderStyleButtons(...)`
+- Generic layer updater: `setLayerImage(...)`
+- Dynamic handler registration from config instead of repetitive functions
+
+This keeps the code maintainable and makes adding new categories easy.
+
+## Project Structure
 
 ```text
 alpaca-image-generator/
@@ -32,50 +55,30 @@ alpaca-image-generator/
 |-- style.css
 |-- script.js
 |-- README.md
+|-- favicon.ico
 `-- assets/
+	|-- backgrounds/
+	|-- neck/
 	|-- hair/
 	|-- eyes/
-	|-- mouth/
 	|-- ears/
-	|-- neck/
-	`-- background/
+	|-- mouth/
+	|-- leg/
+	|-- accessories/
+	`-- nose.png
 ```
 
-## How To Run
+## Run Locally
 
 1. Clone or download this repository.
 2. Open the project folder.
-3. Open `index.html` in your browser.
+3. Run with a local server (recommended):
+   - VS Code Live Server, or
+   - `python -m http.server`
+4. Open `http://localhost:8000`
 
-Optional local server examples:
-
-- VS Code Live Server extension
-- Python: `python -m http.server`
-
-Then open `http://localhost:8000`.
-
-## How It Works
-
-- The app displays alpaca image layers from the `assets/` folders.
-- Each button/action updates one or more layer image sources.
-- The background change action cycles through available background images.
-
-## Next Improvements
-
-- Add full customization controls for hair, eyes, mouth, ears, and neck.
-- Add a randomize button to generate a complete alpaca combination.
-- Add download/export as PNG using a canvas capture flow.
-- Improve responsive layout and visual styling.
-
-## Learning Outcomes
-
-This project helps practice:
-
-- DOM selection and updates
-- Event-driven UI interactions
-- Asset organization and layer compositing
-- Building small interactive front-end tools
+You can also open `index.html` directly in a browser.
 
 ## License
 
-Use this project for learning and portfolio purposes.
+This project is for learning and portfolio use.
