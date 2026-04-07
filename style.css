@@ -1,17 +1,18 @@
 body {
   background: #e1e1e1;
-  margin: 2rem 6rem;
   font-family: Arial, sans-serif;
   color: #000048;
 }
 h1 {
   font-size: 2.5rem;
   font-weight: 900;
+  text-align: center;
+  margin: 2rem 0;
 }
 
 .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
   gap: 20px;
   justify-content: center;
   align-items: start;
@@ -22,6 +23,17 @@ h1 {
   aspect-ratio: 1 / 1;
   margin: 2rem;
 }
+
+h3 {
+  margin-top: 0;
+}
+
+#controls {
+  width: 100%;
+  max-width: 350px;
+  margin: 2rem;
+}
+
 #background,
 #neck,
 #hair,
@@ -65,17 +77,13 @@ h1 {
   object-fit: contain;
 }
 
-#controls {
-  width: 100%;
-  max-width: 420px;
-  margin-bottom: 2rem;
-}
 .accessories,
 .style {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   max-width: 400px;
+  margin-bottom: 2rem;
 }
 
 button {
